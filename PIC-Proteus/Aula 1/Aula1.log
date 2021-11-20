@@ -1,0 +1,11 @@
+0	1	mikroCPIC1618.exe -MSF -DBG -pP16F877A -DL -O11111114 -fo1 -N"D:\Workspace\Projeto A3- Micontroladores e Microprocessadores\Proteus\Teste\Aula1.mcppi" -SP"D:\Program Files\Mikroelektronika\mikroC PRO for PIC\Defs\" -SP"D:\Program Files\Mikroelektronika\mikroC PRO for PIC\Uses\P16\" -SP"D:\Workspace\Projeto A3- Micontroladores e Microprocessadores\Proteus\Teste\" -IP"D:\Program Files\Mikroelektronika\mikroC PRO for PIC\Uses\P16\" "Aula1.c" "__Lib_Math.mcl" "__Lib_MathDouble.mcl" "__Lib_System.mcl" "__Lib_Delays.mcl"	 
+hint: 0	1139	Available RAM: 352 [bytes], Available ROM: 8192 [bytes]	 
+diagnostics: 0	122	Compilation Started	Aula1.c
+diagnostics: 37	123	Compiled Successfully	Aula1.c
+diagnostics: 0	127	All files Compiled in 437 ms	 
+hint: 0	1144	Used RAM (bytes): 5 (1%)  Free RAM (bytes): 347 (99%)	Used RAM (bytes): 5 (1%)  Free RAM (bytes): 347 (99%)
+hint: 0	1144	Used ROM (program words): 162 (2%)  Free ROM (program words): 8030 (98%)	Used ROM (program words): 162 (2%)  Free ROM (program words): 8030 (98%)
+diagnostics: 0	125	Project Linked Successfully	Aula1.mcppi
+diagnostics: 0	128	Linked in 0 ms	 
+diagnostics: 0	129	Project 'Aula1.mcppi' completed: 594 ms	 
+diagnostics: 0	103	Finished successfully: 09 nov 2021, 21:54:17	Aula1.mcppi

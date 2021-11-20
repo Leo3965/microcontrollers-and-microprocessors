@@ -1,0 +1,5 @@
+main
+	ConfigPIC
+	ligaMotor1
+interrupt_low
+interrupt
