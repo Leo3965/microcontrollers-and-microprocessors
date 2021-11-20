@@ -10,6 +10,16 @@
 
  ---------------------------------------
 
+ ## *Lux*
+>  - Dia ensolarado de verão em local aberto ≈ 100.000 lux 
+>  - Dia encoberto de verão ≈ 20.000 lux 
+>  - Dia escuro de inverno ≈ 3.000 lux 
+>  - Boa iluminação de rua ≈ 20 a 40 lux 
+>  - Noite de lua cheia ≈ 0,25 lux 
+>  - Luz de estrelas ≈ 0,01 lux.
+
+ ---------------------------------------
+
  ## *Cores*
  *Verde:*
  > O verde é a cor que ajuda a promover o equilíbrio interno e a diminuir o estresse. Na terapia das cores, essa cor possui uma ação refrescante e calmante, ajudando a promover o bem-estar físico e mental. Além disso, ajuda a estimular a imunidade, sendo indicada para combater doenças infecciosas.
