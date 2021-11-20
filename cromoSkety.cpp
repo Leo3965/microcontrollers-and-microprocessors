@@ -2,20 +2,21 @@
 # ifdef __AVR__
 # include <avr/power.h>
 # endif
-# define REDLED1 8
-# define BLUELED1 9
-# define GREENLED1 10
+# define REDLED1 A1
+# define BLUELED1 A2
+# define GREENLED1 A3
 # define REDLED2 11
 # define GREENLED2 12
 # define BLUELED2 13
 # define LDR A0
 # define NEO 12
-# define PIN 6
+# define NEOPIN 6
 # define MOVE 7
 # define BTN 3
 
 bool presence = false;
 
+int time = 0;
 int red = 0;
 int green = 0;
 int blue = 0;
@@ -24,7 +25,7 @@ char color = 0;
 int colorNumber;
 int lrdValue = 0;
 
-Adafruit_NeoPixel strip = Adafruit_NeoPixel(NEO, PIN, NEO_GRB + NEO_KHZ800);
+Adafruit_NeoPixel strip = Adafruit_NeoPixel(NEO, NEOPIN, NEO_GRB + NEO_KHZ800);
 
 void setup()
 {
@@ -34,7 +35,7 @@ void setup()
   pinMode(REDLED2, OUTPUT);
   pinMode(BLUELED2, OUTPUT);
   pinMode(GREENLED2, OUTPUT);
-  pinMode(NEO, OUTPUT);
+  pinMode(NEOPIN, OUTPUT);
   pinMode(LDR, INPUT);
   pinMode(MOVE, INPUT);
   pinMode(BTN, INPUT);
@@ -49,6 +50,17 @@ void setup()
   Serial.begin(9600);
 
   attachInterrupt(digitalPinToInterrupt(BTN), TurnOfalarm, RISING);
+
+  // Configuração do timer1 
+  TCCR1A = 0;                        //confira timer para operação normal pinos OC1A e OC1B desconectados
+  TCCR1B = 0;                        //limpa registrador
+  TCCR1B |= (1<<CS10)|(1 << CS12);   // configura prescaler para 1024: CS12 = 1 e CS10 = 1
+
+  TCNT1 = 0xC2F7;                    // incia timer com valor para que estouro ocorra em 1 segundo
+                                     // 65536-(16MHz/1024/1Hz) = 49911 = 0xC2F7
+  
+  TIMSK1 |= (1 << TOIE1);           // habilita a interrupção do TIMER1
+
 }
 
 void loop()
@@ -61,7 +73,7 @@ void loop()
   
   //LDR
   lrdValue = analogRead(LDR);
-  if (lrdValue < 377) sendLux(lrdValue);
+  //if (lrdValue < 377) sendLux(lrdValue);
   //Serial.println(lrdValue);
   
   if (digitalRead(MOVE))
@@ -72,19 +84,31 @@ void loop()
   while(presence) {
     alarmLeds(100);
     alarmNEO(strip.Color(127, 0, 0), 50);
+    sendAlert();
 
-    if (!presence) changeLedColor(0); // Desliga os leds
+    if (!presence) {
+      turnOnLights(0); // Desliga os leds
+    } 
   }
   
   
   //Light
-  colorNumber = getColor(color);   
+  if (color == 'g' || color == 'b' || color == 'r' || color == 'y' ||
+   color == 'o' || color == 'p' || color == 't' || color == 's') {
+
+    turnOnLights(getColor(color));
+
+  }
+  
+}
+
+// Liga todas as luzes
+void turnOnLights(uint32_t colorNumber){
   changeLedColor(colorNumber);
   turnOnleds();
   turnOnNEO(strip.Color(red, green, blue), 50);
-  delay(1000);
-
 }
+
 
 void turnOnleds() {
   analogWrite(REDLED1, red);
@@ -96,7 +120,7 @@ void turnOnleds() {
   delay(100); 
 }
 
-// (Green - 1), (Blue - 2), (Red - 3), (Yellow - 4), (Orange - 5), (Purple - 6)
+// (Green - 1), (Blue - 2), (Red - 3), (Yellow - 4), (Orange - 5), (Purple - 6), (Turn off - 0), (Sun - 7)
 int getColor(char color) {
   
   if (color == 'g') {
@@ -111,50 +135,59 @@ int getColor(char color) {
     return 5;
   } else if (color == 'p') {
     return 6;
-  } else if (color == 't')
+  } else if (color == 't') {
     return 0;
+  } else if (color == 's') {
+    return 7;
+  }
   
 }
 
 void changeLedColor(int color) {
   switch (color) {
-  case 1:
+  case 1: // green
     red = 0;
     blue = 0;
     green = 255;
     break;
 
-  case 2:
+  case 2: // blue
     red = 0;
   	blue = 255;
   	green = 0;
     break;
 
-  case 3:
+  case 3: // red
     red = 255;
   	blue= 0;
   	green = 0;
     break;
   
-  case 4:
+  case 4: // yelow
     red= 255;
   	blue = 0;
   	green = 255;
     break;
 
-  case 5:
+  case 5: // orange
     red = 255;
   	blue = 0;
-  	green = 90;
+  	green = 150;
     break;
 
-  case 6:
+  case 6: // purple
     red = 255;
   	blue = 255;
   	green = 0;
     break;
   
-  case 0:
+  case 7: // sun color
+    red = 150;
+  	blue = 0;
+  	green = 200;
+    break;
+
+  case 0: // turn off
     red = 0;
     blue = 0;
     green = 0;
@@ -165,6 +198,11 @@ void changeLedColor(int color) {
 void sendLux(uint32_t lux){
   Serial.print("Luminosidade baixa: ");
   Serial.println(lux);
+}
+
+// Envia msg de perigo para o backend
+void sendAlert() {
+  Serial.println("Casa em perigo!");
 }
 
 // Preencher os pontos um após o outro com uma determinada cor
@@ -206,4 +244,16 @@ void alarmNEO(uint32_t c, uint8_t wait) {
 
 void TurnOfalarm() {
   presence = false;
+}
+
+ISR(TIMER1_OVF_vect) //interrupção do TIMER1 
+{
+  TCNT1 = 0xC2F7; // Renicia TIMER
+  time++;
+  if (time == 30)
+  {
+    sendLux(lrdValue);
+    time = 0;
+  }
+  
 }
