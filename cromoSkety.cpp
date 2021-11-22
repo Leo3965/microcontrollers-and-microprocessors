@@ -65,16 +65,8 @@ void setup()
 
 void loop()
 {
-  // Lendo monitor
-    color = Serial.read();
-    //Serial.println(color);
-  
-  //alarme(;
-  
-  //LDR
-  lrdValue = analogRead(LDR);
-  //if (lrdValue < 377) sendLux(lrdValue);
-  //Serial.println(lrdValue);
+  // Recebendo informações de luminosidade e do backend
+  getInformation();
   
   if (digitalRead(MOVE))
   {
@@ -192,6 +184,16 @@ void changeLedColor(int color) {
     blue = 0;
     green = 0;
   }
+}
+
+void getInformation() {
+  color = getColor();
+  lrdValue = analogRead(LDR);
+}
+
+// Recebe informações do backend
+char getColor() {
+  return Serial.read();
 }
 
 // Envia quantidade de lux para o backend
