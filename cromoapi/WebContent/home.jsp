@@ -27,36 +27,88 @@
                             <div class="input-group-prepend">
                                 <div class="input-group-text">=)</div>
                             </div>
-                            <input type="text" name="test" class="form-control" id="inlineFormInputGroup" placeholder="Humor">
+                            <input type="text" name="humor" class="form-control" id="inlineFormInputGroup" placeholder="insira o seu humor">
                         </div>
                     </div>
 
                     <div class="col-auto">
                         <button type="submit" class="btn btn-primary mb-2" formaction="/cromoapi/adicionar">Enviar</button>
                     </div>
-
                 </form>
 
             </div>
 
+            <div class="p-3 mb-2 bg-light text-white">
+                <nav aria-label="Navegação de página exemplo">
+                    <ul class="pagination">
+                        <li class="page-item"><a class="page-link" href="/cromoapi/listar">Listar</a></li>
+                    </ul>
+                </nav>
+            </div>
+
             <div class="w-auto p-3, shadow p-3 mb-5 bg-white rounded">
-
-                <br class="text-secondary"> Lista de humor: <br />
-
-                <ul>
-                    <c:forEach items="${humores}" var="humor">
-
-                        <li class="text-secondary">
-                                ${humor.humor} - <fmt:formatDate value="${humor.data}" pattern="dd/MM/yyyy"/>
-                            Humor atual - ${humor.color}
-                            <a href="/cromoapi/removeHumor?id=${humor.id }">remove</a>
-                        </li>
-
-                    </c:forEach>
-                </ul>
+                <ol class="list-group list-group-numbered">
+                    <li class="list-group-item d-flex justify-content-between align-items-start">
+                        <div class="ms-2 me-auto">
+                            <div class="fw-bold">Verde</div>
+                            O verde é a cor que ajuda a promover o equilíbrio interno e a diminuir o estresse
+                        </div>
+                        <span class="badge bg-primary rounded-pill">1</span>
+                    </li>
+                    <li class="list-group-item d-flex justify-content-between align-items-start">
+                        <div class="ms-2 me-auto">
+                            <div class="fw-bold">Azul</div>
+                            A cor azul possui propriedades calmantes e tranquilizantes, que atuam no sistema nervoso e em todo o sistema muscular
+                        </div>
+                        <span class="badge bg-primary rounded-pill">2</span>
+                    </li>
+                    <li class="list-group-item d-flex justify-content-between align-items-start">
+                        <div class="ms-2 me-auto">
+                            <div class="fw-bold">Vermelho</div>
+                            O vermelho é a cor que aumenta a energia, a vitalidade e a adrenalina
+                        </div>
+                        <span class="badge bg-primary rounded-pill">3</span>
+                    </li>
+                    <li class="list-group-item d-flex justify-content-between align-items-start">
+                        <div class="ms-2 me-auto">
+                            <div class="fw-bold">Amarelo</div>
+                            O amarelo é a cor que estimula o intelecto e o sistema nervoso central
+                        </div>
+                        <span class="badge bg-primary rounded-pill">4</span>
+                    </li>
+                    <li class="list-group-item d-flex justify-content-between align-items-start">
+                        <div class="ms-2 me-auto">
+                            <div class="fw-bold">Laranja</div>
+                            O laranja é uma cor muito utilizada na cromoterapia pelo seu poder energético
+                        </div>
+                        <span class="badge bg-primary rounded-pill">5</span>
+                    </li>
+                    <li class="list-group-item d-flex justify-content-between align-items-start">
+                        <div class="ms-2 me-auto">
+                            <div class="fw-bold">Roxo</div>
+                            Reduz medos e angústias e traz estabilidade e equilíbrio da consciência
+                        </div>
+                        <span class="badge bg-primary rounded-pill">6</span>
+                    </li>
+                    <li class="list-group-item d-flex justify-content-between align-items-start">
+                        <div class="ms-2 me-auto">
+                            <div class="fw-bold">Desligar</div>
+                            Desliga todas as luzes
+                        </div>
+                        <span class="badge bg-primary rounded-pill">7</span>
+                    </li>
+                    <li class="list-group-item d-flex justify-content-between align-items-start">
+                        <div class="ms-2 me-auto">
+                            <div class="fw-bold">Sol</div>
+                            Simula a luz solar no ambiente
+                        </div>
+                        <span class="badge bg-primary rounded-pill">8</span>
+                    </li>
+                </ol>
             </div>
 
         </div>
+
     </body>
 
 </html>
