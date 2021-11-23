@@ -35,14 +35,29 @@ public class AdicionarHumorServlet extends HttpServlet {
         Color color;
 
         switch (humor) {
-            case "Feliz":
+            case "Triste":
+                color = Color.ORANGE;
+                break;
+            case "Estressado":
                 color = Color.GREEN;
                 break;
-            case "Triste":
+            case "Nervoso":
                 color = Color.BLUE;
                 break;
-            default:
+            case "Cansado":
                 color = Color.RED;
+                break;
+            case "Estudar":
+                color = Color.YELLOW;
+                break;
+            case "Medo":
+                color = Color.PURPLE;
+                break;
+            case "Sol":
+                color = Color.SUNLIGHT;
+                break;
+            default:
+                color = Color.TURNOFF;
         }
 
         var humorr = new Humor();

@@ -19,9 +19,30 @@
 
     <div class="p-3 mb-2 bg-light text-white">
 
-        <div class="w-auto p-3, shadow p-3 mb-5 bg-white rounded">
+        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+            <a class="navbar-brand" href="https://github.com/Leo3965/microcontrollers-and-microprocessors">CromoAPI</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#conteudoNavbarSuportado" aria-controls="conteudoNavbarSuportado" aria-expanded="false" aria-label="Alterna navegação">
+                <span class="navbar-toggler-icon"></span>
+            </button>
 
-            <br class="text-secondary"> Lista de humor: <br />
+            <div class="collapse navbar-collapse" id="conteudoNavbarSuportado">
+                <ul class="navbar-nav mr-auto">
+                    <li class="nav-item active">
+                        <a class="nav-link" href="/cromoapi">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/cromoapi/listar">Listar</a>
+                    </li>
+
+                </ul>
+                <form style="display: flex; margin-left: 300px;" class="form-inline my-2 my-lg-0">
+                    <input class="form-control mr-sm-2" type="search" placeholder="Pesquisar" aria-label="Pesquisar">
+                    <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Pesquisar</button>
+                </form>
+            </div>
+        </nav>
+
+        <div class="w-auto p-3, shadow p-3 mb-5 bg-white rounded">
 
             <ol class="list-group list-group-numbered">
                 <c:forEach items="${humores}" var="humor">
@@ -39,14 +60,6 @@
                 </c:forEach>
             </ol>
         </div>
-
-        <footer class="p-3 mb-2 bg-light text-white">
-            <nav aria-label="Navegação de página exemplo">
-                <ul class="pagination">
-                    <li class="page-item"><a class="page-link" href="/cromoapi">Home</a></li>
-                </ul>
-            </nav>
-        </footer>
 
     </div>
 

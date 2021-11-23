@@ -18,10 +18,14 @@ public class ColorService {
                 return Color.YELLOW;
             case "GREEN":
                 return Color.GREEN;
+            case "ORANGE":
+                return Color.ORANGE;
             case "PURPLE":
                 return Color.PURPLE;
             case "SUNLIGHT":
                 return Color.SUNLIGHT;
+            case "TURNOFF":
+                return Color.TURNOFF;
             default:
                 return null;
         }
