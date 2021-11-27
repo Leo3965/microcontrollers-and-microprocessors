@@ -63,7 +63,6 @@ public class AdicionarHumorServlet extends HttpServlet {
         var humorr = new Humor();
         humorr.setHumor(humor);
         humorr.setColor(color);
-        humorr.setId(1l);
         humorr.setData(Calendar.getInstance().getTime().toString());
 
         repository.create(humorr);

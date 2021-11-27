@@ -221,7 +221,7 @@ void alarmLeds(uint8_t wait) {
   changeLedColor(0);
   turnOnleds();
   delay(wait);
-  changeLedColor(3);
+  changeLedColor(3); //red
   turnOnleds();
   delay(wait);
 }
@@ -231,7 +231,7 @@ void alarmNEO(uint32_t c, uint8_t wait) {
   for (int j=0; j<10; j++) {  //faz 10 ciclos
     for (int q=0; q < 3; q++) {
       for (uint16_t i=0; i < strip.numPixels(); i=i+3) {
-        strip.setPixelColor(i+q, c);    //liga a cada 3 pixeis
+        strip.setPixelColor(i+q, c);    //liga a cada 3 pixeis (leds)
       }
       strip.show();
 
@@ -250,7 +250,7 @@ void TurnOfalarm() {
 
 ISR(TIMER1_OVF_vect) //interrupção do TIMER1 
 {
-  TCNT1 = 0xC2F7; // Renicia TIMER
+  TCNT1 = 0xC2F7; // Reinicia TIMER
   time++;
   if (time == 30)
   {
